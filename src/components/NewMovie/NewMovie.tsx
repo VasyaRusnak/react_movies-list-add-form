@@ -24,16 +24,26 @@ export const NewMovie: React.FC<Props> = ({ onAdd }) => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (!isFormValid) return;
+    if (!isFormValid) {
+      return;
+    }
 
-    onAdd({ title, description, imgUrl, imdbUrl, imdbId });
+    onAdd({
+      title,
+      description,
+      imgUrl,
+      imdbUrl,
+      imdbId,
+    });
 
+    // чистимо форму
     setTitle('');
     setDescription('');
     setImgUrl('');
     setImdbUrl('');
     setImdbId('');
-    setCount(c => c + 1);
+
+    setCount(prev => prev + 1);
   };
 
   return (
@@ -44,7 +54,7 @@ export const NewMovie: React.FC<Props> = ({ onAdd }) => {
         name="title"
         label="Title"
         value={title}
-        onChange={(e: any) => setTitle(e?.target?.value ?? e)}
+        onChange={setTitle}
         required
       />
 
@@ -52,14 +62,14 @@ export const NewMovie: React.FC<Props> = ({ onAdd }) => {
         name="description"
         label="Description"
         value={description}
-        onChange={(e: any) => setDescription(e?.target?.value ?? e)}
+        onChange={setDescription}
       />
 
       <TextField
         name="imgUrl"
         label="Image URL"
         value={imgUrl}
-        onChange={(e: any) => setImgUrl(e?.target?.value ?? e)}
+        onChange={setImgUrl}
         required
       />
 
@@ -67,7 +77,7 @@ export const NewMovie: React.FC<Props> = ({ onAdd }) => {
         name="imdbUrl"
         label="Imdb URL"
         value={imdbUrl}
-        onChange={(e: any) => setImdbUrl(e?.target?.value ?? e)}
+        onChange={setImdbUrl}
         required
       />
 
@@ -75,7 +85,7 @@ export const NewMovie: React.FC<Props> = ({ onAdd }) => {
         name="imdbId"
         label="Imdb ID"
         value={imdbId}
-        onChange={(e: any) => setImdbId(e?.target?.value ?? e)}
+        onChange={setImdbId}
         required
       />
 
